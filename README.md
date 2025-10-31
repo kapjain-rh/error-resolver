@@ -2,6 +2,16 @@
 
 Automatically detect and resolve errors from terminal output with intelligent solutions from multiple sources including AI analysis, code search, RCA documentation, and web search.
 
+## 🎬 Demo
+
+![Error Resolver Demo](demo.mov)
+
+> **Note:** The demo video shows the complete workflow - from error detection to AI-powered resolution with multiple solution sources.
+>
+> If the video doesn't play, you can also:
+> - Download [demo.mov](demo.mov) directly
+> - Or view it on the [GitHub repository](https://github.com/kapjain-rh/error-resolver)
+
 ## ✨ Features
 
 ### 🎯 Multiple Solution Sources
