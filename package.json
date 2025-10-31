@@ -1,0 +1,188 @@
+{
+  "name": "error-resolver",
+  "displayName": "Error Resolver",
+  "description": "AI-powered error resolver with RCA knowledge base, Gemini AI, Claude AI, and intelligent error grouping. Highest priority solutions from your team's documentation.",
+  "version": "1.1.7",
+  "publisher": "redhat",
+  "author": {
+    "name": "Kapil Jain",
+    "email": "kapjain@redhat.com"
+  },
+  "engines": {
+    "vscode": "^1.105.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Debuggers",
+    "Machine Learning",
+    "Other"
+  ],
+  "keywords": [
+    "error",
+    "debugging",
+    "ai",
+    "gemini",
+    "claude",
+    "rca",
+    "terminal",
+    "troubleshooting",
+    "error-resolution",
+    "knowledge-base"
+  ],
+  "license": "MIT",
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/redhat-developer/error-resolver"
+  },
+  "bugs": {
+    "url": "https://github.com/redhat-developer/error-resolver/issues",
+    "email": "kapjain@redhat.com"
+  },
+  "homepage": "https://github.com/redhat-developer/error-resolver#readme",
+  "contributes": {
+    "commands": [
+      {
+        "command": "error-resolver.createMonitoredTerminal",
+        "title": "Error Resolver: Create Monitored Terminal (Auto-Detect Errors)"
+      },
+      {
+        "command": "error-resolver.analyzeTerminal",
+        "title": "Error Resolver: Analyze Terminal Output (Copy & Paste)"
+      },
+      {
+        "command": "error-resolver.analyzeFromInput",
+        "title": "Error Resolver: Analyze Error Text (Type/Paste)"
+      },
+      {
+        "command": "error-resolver.toggleMonitoring",
+        "title": "Error Resolver: Toggle Auto-Detection (Pause/Resume)"
+      },
+      {
+        "command": "error-resolver.clearCache",
+        "title": "Error Resolver: Clear Notification Cache (For Testing)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "error-resolver.analyzeTerminal",
+        "key": "ctrl+shift+e",
+        "mac": "cmd+shift+e",
+        "when": "terminalFocus"
+      }
+    ],
+    "menus": {
+      "terminal/context": [
+        {
+          "command": "error-resolver.analyzeTerminal",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Error Resolver",
+      "properties": {
+        "error-resolver.geminiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Gemini API key for AI-powered error analysis (get from aistudio.google.com/app/apikey)",
+          "order": 0
+        },
+        "error-resolver.enableGeminiAnalysis": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable AI-powered error analysis using Gemini API (optional, web search is always available)",
+          "order": 1
+        },
+        "error-resolver.claudeApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Claude API key for AI-powered error analysis (get from console.anthropic.com)",
+          "order": 2
+        },
+        "error-resolver.enableClaudeAnalysis": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable AI-powered error analysis using Claude API",
+          "order": 3
+        },
+        "error-resolver.rcaLogPaths": {
+          "type": "array",
+          "default": [],
+          "description": "Paths to RCA (Root Cause Analysis) log directories",
+          "items": {
+            "type": "string"
+          },
+          "order": 4
+        },
+        "error-resolver.autoDetectErrors": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically detect and notify about errors in terminal output",
+          "order": 5
+        },
+        "error-resolver.maxResolutionsPerError": {
+          "type": "number",
+          "default": 10,
+          "description": "Maximum number of resolutions to show per error",
+          "order": 6
+        },
+        "error-resolver.customPatternFiles": {
+          "type": "array",
+          "default": [],
+          "description": "Custom error pattern YAML files (paths relative to workspace root)",
+          "items": {
+            "type": "string"
+          },
+          "order": 7
+        },
+        "error-resolver.enableBuiltinPatterns": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable built-in error patterns (disable to use only custom patterns)",
+          "order": 8
+        }
+      }
+    },
+    "problemMatchers": [
+      {
+        "label": "OLM Error Resolver",
+        "base": "$tsc"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm run watch:esbuild",
+    "watch:esbuild": "esbuild ./src/extension.ts --outfile=./out/extension.js --bundle --external:vscode --sourcemap --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.105.0",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.6.2",
+    "electron-rebuild": "^3.2.9",
+    "esbuild": "^0.25.10",
+    "eslint": "^9.36.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}

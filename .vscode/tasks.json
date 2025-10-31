@@ -1,0 +1,106 @@
+// See https://go.microsoft.com/fwlink/?LinkId=733558
+// for the documentation about the tasks.json format
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+            "label": "watch",
+            "dependsOn": [
+                "npm: watch:tsc",
+                "npm: watch:esbuild"
+            ],
+            "presentation": {
+                "reveal": "never"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Simulate OLM Error",
+            "type": "shell",
+            // This command echoes the exact error format your regex is designed to catch
+            "command": "echo 'Normal InstallWaiting clusterserviceversion/bpfman-operator.v0.5.7-dev-1 installing: waiting for deployment bpfman-operator to become ready: Deployment does not have minimum availability.'",
+
+            // IMPORTANT: This must reference the owner/label you defined in package.json
+            "problemMatcher": {
+                "owner": "olm-error-resolver",
+                "source": "OLM-Troubleshooter",
+                "pattern": {
+                    "regexp": "^\\s*(\\w+)\\s+InstallWaiting\\s+.*?\\s+waiting\\s+for\\s+(.*?):\\s+(.*)$",
+                    "severity": 1,
+                    "file": 2, // Mapped to: deployment bpfman-operator
+                    "message": 3, // Mapped to: Deployment does not have minimum availability.
+                    "line": 1
+                },
+                "fileLocation": "absolute"
+            }
+        },
+        {
+            "label": "npm: watch:esbuild",
+            "type": "npm",
+            "script": "watch:esbuild",
+            "isBackground": true,
+            "group": "build",
+            
+            // 🚨 REPLACE THE STRING REFERENCE WITH THE FULL OBJECT DEFINITION
+            "problemMatcher": {
+                "owner": "esbuild",
+                "pattern": {
+                    "regexp": "(.*):\\s*error:\\s*(.*)",
+                    "file": 1,
+                    "message": 2
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "watch started",
+                    "endsPattern": "build finished"
+                }
+            },
+            "presentation": {
+                "reveal": "never"
+            }
+        },
+        {
+            "label": "npm: compile", // Example for a clean build
+            "type": "npm",
+            "script": "compile",
+            "group": "build",
+            "problemMatcher": [
+                "$tsc"
+            ]
+        },
+		{
+            "type": "npm",
+            "script": "watch:tsc",
+            "group": "build",
+            "problemMatcher": "$tsc-watch",
+            "isBackground": true,
+            "label": "npm: watch:tsc",
+            "presentation": {
+                "group": "watch",
+                "reveal": "never"
+            }
+        },
+		{
+			"type": "npm",
+			"script": "watch-tests",
+			"problemMatcher": "$tsc-watch",
+			"isBackground": true,
+			"presentation": {
+				"reveal": "never",
+				"group": "watchers"
+			},
+			"group": "build"
+		},
+		{
+			"label": "tasks: watch-tests",
+			"dependsOn": [
+				"npm: watch",
+				"npm: watch-tests"
+			],
+			"problemMatcher": []
+		}
+	]
+}

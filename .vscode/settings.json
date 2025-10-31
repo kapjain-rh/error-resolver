@@ -1,0 +1,6 @@
+{
+    "error-resolver.rcaLogPaths": [
+        "/Users/kapjain/Workspace/openshift-tests-private/error-resolver/docs/rca"
+    ],
+    "error-resolver.enableBuiltinPatterns": false
+}

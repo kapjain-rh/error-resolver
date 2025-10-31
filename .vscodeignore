@@ -1,0 +1,66 @@
+# Development files
+.vscode/**
+.vscode-test/**
+.vscode-test.mjs
+out/**
+src/**
+*.vsix
+
+# Build tools
+esbuild.js
+tsconfig.json
+eslint.config.mjs
+.eslintrc.json
+problemMatcher.json
+esbuild-problem-matcher.json
+
+# Git files
+.gitignore
+.gitattributes
+
+# Test files
+test/**
+**/test/**
+**/*test.js
+test-*.js
+**/.vscode-test.*
+
+# TypeScript source maps
+**/*.map
+**/*.ts
+
+# Documentation for developers (keep README.md)
+vsc-extension-quickstart.md
+CLAUDE.md
+HOW_IT_WORKS.md
+RECOMMENDED_WORKFLOW.md
+TEST_SCENARIOS.md
+USAGE_GUIDE.md
+DEDUPLICATION_FIX.md
+TROUBLESHOOTING.md
+TESTING_GUIDE.md
+RCA_SETUP_GUIDE.md
+RCA_COMPLETE_SUMMARY.md
+TEST_RCA_NOW.md
+QUICK_START.txt
+
+# Keep these essential files:
+# - README.md (user documentation)
+# - CHANGELOG.md (version history)
+# - docs/rca/** (RCA knowledge base - INCLUDE!)
+
+# Node modules
+node_modules/**
+.npmrc
+.yarnrc
+package-lock.json
+npm-debug.log
+yarn-error.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Misc
+*.sh
+.claude/**

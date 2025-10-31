@@ -1,0 +1,32 @@
+# Test Error Patterns for Development
+# This file is used when testing the extension with enableBuiltinPatterns: false
+# Only patterns defined here will be detected
+
+globalSettings:
+  maxContextLines: 50
+  defaultPriority: 5
+  caseInsensitive: false
+  hotReload: true
+
+patterns:
+  # Ginkgo/Go Test Failure Pattern
+  - name: "Ginkgo Test Failure"
+    enabled: true
+    type: "test"
+    pattern: "\\[FAILED\\] in \\[It\\]"
+    priority: 10
+    groupConsecutive: true
+    contextExtraction:
+      linesAbove: 10
+      linesBelow: 3
+      includeStackTrace: false
+    extractFields:
+      testContext:
+        regex: "\\[FAILED\\] in \\[(.+)\\]"
+        group: 1
+      filePath:
+        regex: "\\[FAILED\\].+- ([^:]+):(\\d+)"
+        group: 1
+      lineNumber:
+        regex: "\\[FAILED\\].+- [^:]+:(\\d+)"
+        group: 1

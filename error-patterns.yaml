@@ -1,0 +1,320 @@
+# Error Resolver - Error Pattern Configuration
+# This file defines how errors are detected and context is extracted
+# You can customize patterns or add your own in .vscode/error-patterns.yaml
+
+# Global settings applied to all patterns
+globalSettings:
+  maxContextLines: 50          # Maximum lines to extract for context
+  defaultPriority: 5           # Default priority for patterns without one
+  caseInsensitive: false       # Case-insensitive pattern matching
+  hotReload: true              # Reload patterns when file changes
+
+# Error pattern definitions
+patterns:
+
+  # JavaScript/TypeScript Errors
+  - name: "JavaScript Module Not Found"
+    enabled: true
+    type: "javascript"
+    pattern: "Cannot find module ['\"]([^'\"]+)['\"]"
+    priority: 10
+    contextExtraction:
+      linesAbove: 2
+      linesBelow: 5
+      includeStackTrace: true
+      stackTraceDepth: 10
+    extractFields:
+      errorMessage:
+        regex: "Error: (.+)"
+        group: 1
+      moduleName:
+        regex: "Cannot find module ['\"]([^'\"]+)['\"]"
+        group: 1
+      filePath:
+        regex: "at .+ \\((.+):(\\d+):(\\d+)\\)"
+        group: 1
+      lineNumber:
+        regex: "at .+ \\(.+:(\\d+):\\d+\\)"
+        group: 1
+
+  - name: "JavaScript TypeError"
+    enabled: true
+    type: "javascript"
+    pattern: "TypeError: (.+)"
+    priority: 9
+    contextExtraction:
+      linesAbove: 1
+      linesBelow: 5
+      includeStackTrace: true
+      stackTraceDepth: 8
+    extractFields:
+      errorMessage:
+        regex: "TypeError: (.+)"
+        group: 1
+      filePath:
+        regex: "at .+ \\((.+):(\\d+):(\\d+)\\)"
+        group: 1
+      lineNumber:
+        regex: "at .+ \\(.+:(\\d+):\\d+\\)"
+        group: 1
+
+  - name: "JavaScript ReferenceError"
+    enabled: true
+    type: "javascript"
+    pattern: "ReferenceError: (.+)"
+    priority: 9
+    contextExtraction:
+      linesAbove: 1
+      linesBelow: 5
+      includeStackTrace: true
+      stackTraceDepth: 8
+    extractFields:
+      errorMessage:
+        regex: "ReferenceError: (.+)"
+        group: 1
+
+  - name: "JavaScript SyntaxError"
+    enabled: true
+    type: "javascript"
+    pattern: "SyntaxError: (.+)"
+    priority: 9
+    contextExtraction:
+      linesAbove: 2
+      linesBelow: 3
+      includeStackTrace: false
+    extractFields:
+      errorMessage:
+        regex: "SyntaxError: (.+)"
+        group: 1
+      filePath:
+        regex: "at (.+):(\\d+):(\\d+)"
+        group: 1
+
+  # TypeScript Errors
+  - name: "TypeScript Compiler Error"
+    enabled: true
+    type: "typescript"
+    pattern: "error TS\\d+:"
+    priority: 9
+    contextExtraction:
+      linesAbove: 1
+      linesBelow: 3
+      includeStackTrace: false
+    extractFields:
+      errorCode:
+        regex: "error (TS\\d+):"
+        group: 1
+      errorMessage:
+        regex: "error TS\\d+: (.+)"
+        group: 1
+      filePath:
+        regex: "^(.+)\\(\\d+,\\d+\\):"
+        group: 1
+      lineNumber:
+        regex: "^.+\\((\\d+),\\d+\\):"
+        group: 1
+
+  # Python Errors
+  - name: "Python ModuleNotFoundError"
+    enabled: true
+    type: "python"
+    pattern: "ModuleNotFoundError: No module named"
+    priority: 10
+    contextExtraction:
+      linesAbove: 1
+      linesBelow: 0
+      includeStackTrace: true
+      stackTraceDepth: 15
+    extractFields:
+      errorType:
+        regex: "(\\w+Error):"
+        group: 1
+      errorMessage:
+        regex: "\\w+Error: (.+)"
+        group: 1
+      moduleName:
+        regex: "No module named ['\"]([^'\"]+)['\"]"
+        group: 1
+
+  - name: "Python ImportError"
+    enabled: true
+    type: "python"
+    pattern: "ImportError: (.+)"
+    priority: 9
+    contextExtraction:
+      linesAbove: 1
+      linesBelow: 0
+      includeStackTrace: true
+      stackTraceDepth: 15
+    extractFields:
+      errorMessage:
+        regex: "ImportError: (.+)"
+        group: 1
+
+  - name: "Python Generic Exception"
+    enabled: true
+    type: "python"
+    pattern: "^(\\w+Error): (.+)"
+    priority: 7
+    contextExtraction:
+      linesAbove: 1
+      linesBelow: 0
+      includeStackTrace: true
+      stackTraceDepth: 15
+    extractFields:
+      errorType:
+        regex: "^(\\w+Error):"
+        group: 1
+      errorMessage:
+        regex: "^\\w+Error: (.+)"
+        group: 1
+
+  # npm Errors
+  - name: "npm Install Error"
+    enabled: true
+    type: "npm"
+    pattern: "npm ERR!"
+    priority: 8
+    groupConsecutive: true  # npm errors often span multiple lines
+    contextExtraction:
+      linesAbove: 0
+      linesBelow: 15
+      includeStackTrace: false
+      aggregateMultiLine: true
+    extractFields:
+      errorCode:
+        regex: "npm ERR! code (\\w+)"
+        group: 1
+      errorMessage:
+        regex: "npm ERR! (.+)"
+        group: 1
+
+  # Java Errors
+  - name: "Java Exception"
+    enabled: true
+    type: "java"
+    pattern: "Exception in thread"
+    priority: 9
+    contextExtraction:
+      linesAbove: 0
+      linesBelow: 20
+      includeStackTrace: true
+      stackTraceDepth: 20
+    extractFields:
+      exceptionType:
+        regex: "(\\w+Exception):"
+        group: 1
+      errorMessage:
+        regex: "\\w+Exception: (.+)"
+        group: 1
+
+  # Go Errors
+  - name: "Go Panic"
+    enabled: true
+    type: "go"
+    pattern: "panic: (.+)"
+    priority: 9
+    contextExtraction:
+      linesAbove: 1
+      linesBelow: 10
+      includeStackTrace: true
+      stackTraceDepth: 15
+    extractFields:
+      errorMessage:
+        regex: "panic: (.+)"
+        group: 1
+
+  # Compilation Errors
+  - name: "Generic Compilation Error"
+    enabled: true
+    type: "compilation"
+    pattern: "\\berror\\b"
+    priority: 5
+    groupConsecutive: true  # compilation errors often span multiple lines
+    contextExtraction:
+      linesAbove: 2
+      linesBelow: 3
+      includeStackTrace: false
+    extractFields:
+      errorMessage:
+        regex: "error: (.+)"
+        group: 1
+
+  # Test Failures
+  - name: "Ginkgo/Go Test Failure"
+    enabled: true
+    type: "test"
+    pattern: "\\[FAILED\\] in \\[It\\]"
+    priority: 8
+    groupConsecutive: true  # test failures often span multiple lines
+    contextExtraction:
+      linesAbove: 10
+      linesBelow: 3
+      includeStackTrace: false
+    extractFields:
+      testContext:
+        regex: "\\[FAILED\\] in \\[(.+)\\]"
+        group: 1
+      filePath:
+        regex: "\\[FAILED\\].+- ([^:]+):(\\d+)"
+        group: 1
+      lineNumber:
+        regex: "\\[FAILED\\].+- [^:]+:(\\d+)"
+        group: 1
+      errorMessage:
+        regex: "\\[FAILED\\] in \\[.+\\] - (.+)"
+        group: 1
+      timestamp:
+        regex: "@ (.+)$"
+        group: 1
+
+  - name: "Generic Test Failure"
+    enabled: true
+    type: "test"
+    pattern: "\\b(FAIL|FAILED)\\b"
+    priority: 6
+    groupConsecutive: true  # test failures often span multiple lines
+    contextExtraction:
+      linesAbove: 3
+      linesBelow: 5
+      includeStackTrace: false
+    extractFields:
+      testName:
+        regex: "FAILED? (.+)"
+        group: 1
+
+# Custom pattern examples (commented out)
+# Uncomment and customize for your needs
+
+# - name: "Custom API Error"
+#   enabled: true
+#   type: "api"
+#   pattern: "API_ERROR: (.+)"
+#   priority: 10
+#   contextExtraction:
+#     linesAbove: 2
+#     linesBelow: 5
+#     includeStackTrace: false
+#   extractFields:
+#     errorCode:
+#       regex: "API_ERROR: (\\d+)"
+#       group: 1
+#     errorMessage:
+#       regex: "API_ERROR: \\d+ - (.+)"
+#       group: 1
+
+# - name: "Database Connection Error"
+#   enabled: true
+#   type: "database"
+#   pattern: "Database connection failed"
+#   priority: 9
+#   contextExtraction:
+#     linesAbove: 1
+#     linesBelow: 3
+#   extractFields:
+#     host:
+#       regex: "host: ([^\\s]+)"
+#       group: 1
+#     port:
+#       regex: "port: (\\d+)"
+#       group: 1
