@@ -572,9 +572,9 @@ MIT License - See LICENSE file for details
 - **Kapil Jain** - kapjain@redhat.com
 
 **Resources:**
-- **Issues**: https://github.com/redhat-developer/error-resolver/issues
-- **Discussions**: https://github.com/redhat-developer/error-resolver/discussions
-- **Repository**: https://github.com/redhat-developer/error-resolver
+- **Issues**: https://github.com/kapjain-rh/error-resolver/issues
+- **Discussions**: https://github.com/kapjain-rh/error-resolver/discussions
+- **Repository**: https://github.com/kapjain-rh/error-resolver
 
 ---
 

@@ -2,7 +2,7 @@
   "name": "error-resolver",
   "displayName": "Error Resolver",
   "description": "AI-powered error resolver with RCA knowledge base, Gemini AI, Claude AI, and intelligent error grouping. Highest priority solutions from your team's documentation.",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "publisher": "redhat",
   "author": {
     "name": "Kapil Jain",
@@ -34,13 +34,13 @@
   "main": "./dist/extension.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/redhat-developer/error-resolver"
+    "url": "https://github.com/kapjain-rh/error-resolver"
   },
   "bugs": {
-    "url": "https://github.com/redhat-developer/error-resolver/issues",
+    "url": "https://github.com/kapjain-rh/error-resolver/issues",
     "email": "kapjain@redhat.com"
   },
-  "homepage": "https://github.com/redhat-developer/error-resolver#readme",
+  "homepage": "https://github.com/kapjain-rh/error-resolver#readme",
   "contributes": {
     "commands": [
       {
