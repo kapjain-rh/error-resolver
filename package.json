@@ -2,16 +2,8 @@
   "name": "error-resolver",
   "displayName": "Error Resolver",
   "description": "AI-powered error resolver with RCA knowledge base, Gemini AI, Claude AI, and intelligent error grouping. Highest priority solutions from your team's documentation.",
-<<<<<<< HEAD
-  "version": "1.1.8",
-=======
-<<<<<<< HEAD
-  "version": "1.1.8",
-=======
-  "version": "1.0.0",
->>>>>>> 3949a49 (Readme Updated)
->>>>>>> 23ac9d8 (Readme Updated)
-  "publisher": "redhat",
+  "version": "1.0.4",
+  "publisher": "kapjain",
   "author": {
     "name": "Kapil Jain",
     "email": "kapjain@redhat.com"
@@ -38,7 +30,9 @@
     "knowledge-base"
   ],
   "license": "MIT",
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./dist/extension.js",
   "repository": {
     "type": "git",

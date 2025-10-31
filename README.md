@@ -122,9 +122,34 @@ Automatically detect and resolve errors from terminal output with intelligent so
 
 ## ⚙️ Configuration
 
-### Extension Settings
+### How to Access Extension Settings
 
-Access via VS Code Settings (`Cmd/Ctrl + ,`):
+**After installing the extension, you MUST reload VS Code:**
+
+1. Install the VSIX file:
+   - `Cmd+Shift+P` → "Extensions: Install from VSIX"
+   - Select `error-resolver-<version>.vsix`
+
+2. **Reload VS Code** (Important!):
+   - `Cmd+Shift+P` → "Developer: Reload Window"
+   - Or close and reopen VS Code
+
+3. Access Settings:
+   - Press `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows/Linux)
+   - Type "Preferences: Open Settings (UI)"
+   - Search for: `@ext:kapjain.error-resolver`
+   - OR search for: `kapjain`
+   - OR search for: `error-resolver`
+
+4. All settings will appear with "Error Resolver:" prefix
+
+**Troubleshooting:**
+- If settings don't appear, uninstall ALL previous versions first:
+  - `Cmd+Shift+P` → "Extensions: Show Installed Extensions"
+  - Search for "error" and uninstall any "Error Resolver" extensions
+  - Then install v1.0.4 and reload
+
+### Extension Settings
 
 | Setting | Default | Description |
 |---------|---------|-------------|
@@ -135,6 +160,8 @@ Access via VS Code Settings (`Cmd/Ctrl + ,`):
 | `error-resolver.rcaLogPaths` | `[]` | Array of RCA log directory paths |
 | `error-resolver.autoDetectErrors` | `true` | Auto-detect errors in monitored terminals |
 | `error-resolver.maxResolutionsPerError` | `10` | Maximum solutions to show per error |
+| `error-resolver.customPatternFiles` | `[]` | Custom error pattern YAML files |
+| `error-resolver.enableBuiltinPatterns` | `true` | Enable built-in error patterns |
 
 ### Setting up AI Analysis (Optional)
 
