@@ -472,6 +472,32 @@ npm run package          # Production build (minified)
 npm run test             # Run tests
 ```
 
+### Building the Extension:
+
+To build a distributable VSIX package:
+
+```bash
+# Install dependencies (if not already done)
+npm install
+
+# Build the VSIX package
+npx @vscode/vsce package
+
+# This creates error-resolver-<version>.vsix in the project root
+```
+
+**Install the built extension:**
+1. Open VS Code
+2. Press `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows/Linux)
+3. Type "Extensions: Install from VSIX"
+4. Select the `error-resolver-<version>.vsix` file
+5. Reload VS Code when prompted
+
+**Verify the build:**
+```bash
+ls -lh error-resolver-*.vsix    # Check VSIX file size and version
+```
+
 ### Project Structure:
 
 ```
