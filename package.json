@@ -2,7 +2,7 @@
   "name": "error-resolver",
   "displayName": "Error Resolver",
   "description": "AI-powered error resolver with RCA knowledge base, Gemini AI, Claude AI, and intelligent error grouping. Highest priority solutions from your team's documentation.",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "publisher": "kapjain",
   "author": {
     "name": "Kapil Jain",

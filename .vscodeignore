@@ -64,3 +64,6 @@ Thumbs.db
 # Misc
 *.sh
 .claude/**
+
+# Demo files - only include GIF, exclude video
+demo.mov

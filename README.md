@@ -4,13 +4,9 @@ Automatically detect and resolve errors from terminal output with intelligent so
 
 ## 🎬 Demo
 
-![Error Resolver Demo](demo.mov)
+![Error Resolver Demo](demo.gif)
 
-> **Note:** The demo video shows the complete workflow - from error detection to AI-powered resolution with multiple solution sources.
->
-> If the video doesn't play, you can also:
-> - Download [demo.mov](demo.mov) directly
-> - Or view it on the [GitHub repository](https://github.com/kapjain-rh/error-resolver)
+> **Demo:** Complete workflow from error detection to AI-powered resolution with multiple solution sources.
 
 ## ✨ Features
 
